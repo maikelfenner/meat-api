@@ -3,13 +3,15 @@ import {Server} from './server/server'
 import {environment} from './common/environment'
 import {usersRouter} from './users/users.router'
 import {reviewsRouter} from './reviews/reviews.router'
+import {restaurantsRouter} from './restaurants/restaurants.router';
 import {User} from './users/users.model'
 import {Review} from './reviews/reviews.model'
 
 let server: Server
 const routers = [
     usersRouter,
-    reviewsRouter
+    reviewsRouter,
+    restaurantsRouter
 ]
 
 const beforeAllTests = () => {
