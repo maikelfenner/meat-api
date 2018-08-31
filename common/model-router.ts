@@ -43,12 +43,12 @@ export abstract class ModelRouter<D extends mongoose.Document> extends Router {
     return resource
   }
 
-  validateId = (req, resp, next)=>{
-    if(!mongoose.Types.ObjectId.isValid(req.params.id)){
-      next(new NotFoundError('Document not found'))
-    }else{
-      next()
-    }
+  validateId = (req, resp, next) => {
+      if(!mongoose.Types.ObjectId.isValid(req.params.id)) {
+          next(new NotFoundError('Document not found'))
+      } else {
+          next()
+      }
   }
 
   findAll = (req, resp, next)=>{
