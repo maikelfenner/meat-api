@@ -6,12 +6,13 @@ const restaurants_router_1 = require("./restaurants/restaurants.router");
 const reviews_router_1 = require("./reviews/reviews.router");
 const main_router_1 = require("./main.router");
 const server = new server_1.Server();
-server.bootstrap([
+const routers = [
     users_router_1.usersRouter,
     restaurants_router_1.restaurantsRouter,
     reviews_router_1.reviewsRouter,
     main_router_1.mainRouter
-]).then(server => {
+];
+server.bootstrap(routers).then(server => {
     console.log('Server is listening on:', server.application.address());
 }).catch(error => {
     console.log('Server failed to start');
