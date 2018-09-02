@@ -42,3 +42,23 @@ test('post /reviews/', () => {
             expect(response.body.restaurant).toBeDefined()
         })
 })
+
+test('post /reviews/ - sem data', () => {
+    return request(address)
+        .post('/reviews')
+        .send({
+            rating: 4,
+            comments: 'nice',
+            user: new mongoose.Types.ObjectId(),
+            restaurant: new mongoose.Types.ObjectId()
+        })
+        .then(response => {
+            expect(response.status).toBe(200)
+            expect(response.body._id).toBeDefined()
+            expect(response.body.date).toBeDefined()
+            expect(response.body.rating).toBe(4)
+            expect(response.body.comments).toBe('nice')
+            expect(response.body.user).toBeDefined()
+            expect(response.body.restaurant).toBeDefined()
+        })
+})
