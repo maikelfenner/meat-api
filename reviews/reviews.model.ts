@@ -14,7 +14,7 @@ export interface Review extends mongoose.Document {
 const reviewSchema = new mongoose.Schema({
   date: {
     type: Date,
-    required: true
+    required: false
   },
   rating: {
     type: Number,
@@ -39,5 +39,15 @@ const reviewSchema = new mongoose.Schema({
   }
 })
 
+const saveMiddleware = function(next) {
+    const review: Review = this
+    
+    if(!review.date) {
+        review.date = new Date()
+    }
+    next()
+}
+
+reviewSchema.pre('save', saveMiddleware)
 
 export const Review = mongoose.model<Review>('Review', reviewSchema)

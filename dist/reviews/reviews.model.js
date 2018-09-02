@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const reviewSchema = new mongoose.Schema({
     date: {
         type: Date,
-        required: true
+        required: false
     },
     rating: {
         type: Number,
@@ -28,4 +28,12 @@ const reviewSchema = new mongoose.Schema({
         required: true
     }
 });
+const saveMiddleware = function (next) {
+    const review = this;
+    if (!review.date) {
+        review.date = new Date();
+    }
+    next();
+};
+reviewSchema.pre('save', saveMiddleware);
 exports.Review = mongoose.model('Review', reviewSchema);
